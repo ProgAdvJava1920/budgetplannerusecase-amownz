@@ -1,11 +1,14 @@
 package be.pxl.student.util;
 
 import be.pxl.student.entity.Account;
+import be.pxl.student.entity.Payment;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -47,5 +50,27 @@ class BudgetPlannerMapperTest {
         Account lineToAccount = mapper.mapDataLineToAccount(testDataLine);
 
         assertEquals(expectedAccount, lineToAccount);
+    }
+
+
+    @Test
+    void it_should_map_line_to_payment() throws ParseException {
+        Payment expectedPayment = new Payment(
+                "BE17795215960626",
+                mapper.convertToDate("Thu Feb 13 05:47:35 CET 2020"),
+                265.8f,
+                "EUR",
+                "Ut ut necessitatibus itaque ullam."
+        );
+
+
+    }
+
+    @Test
+    void it_should_convert_to_date_to_string_and_back_again() throws ParseException {
+        String testDate = "Thu Feb 13 05:47:35 CET 2020";
+        Date date = mapper.convertToDate(testDate);
+        String dateToString = mapper.convertDateToString(date);
+        assertEquals(testDate, dateToString);
     }
 }
