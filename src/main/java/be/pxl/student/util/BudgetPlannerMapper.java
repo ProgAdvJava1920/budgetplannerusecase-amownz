@@ -6,7 +6,6 @@ import be.pxl.student.entity.Payment;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class BudgetPlannerMapper {
 
@@ -42,7 +41,7 @@ public class BudgetPlannerMapper {
         String name = items[0];
         String iban = items[1];
 
-        Account account = accountMap.getOrDefault(iban, new Account(name,iban));
+        Account account = accountMap.getOrDefault(iban, new Account( name,iban));
         Payment payment = mapItemsToPayment(items);
         account.getPayments().add(payment);
         return account;

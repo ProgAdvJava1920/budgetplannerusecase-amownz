@@ -4,12 +4,26 @@ import java.util.Date;
 import java.util.Objects;
 
 public class Payment {
+
+    private int id;
+    private int accountId;
+    private int counterAccountId;
     private String IBAN;
     private Date date;
     private float amount;
     private String currency;
     private String detail;
 
+    public Payment(int id, int accountId, int counterAccountId, String IBAN, Date date, float amount, String currency, String detail) {
+        this.id = id;
+        this.accountId = accountId;
+        this.counterAccountId = counterAccountId;
+        this.IBAN = IBAN;
+        this.date = date;
+        this.amount = amount;
+        this.currency = currency;
+        this.detail = detail;
+    }
 
     public Payment(String IBAN, Date date, float amount, String currency, String detail) {
         this.IBAN = IBAN;
