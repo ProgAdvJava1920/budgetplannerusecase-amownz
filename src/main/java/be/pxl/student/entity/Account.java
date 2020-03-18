@@ -75,4 +75,8 @@ public class Account {
     public int getId() {
         return id;
     }
+
+    public void setId(int accountId) {
+        this.id = accountId;
+    }
 }

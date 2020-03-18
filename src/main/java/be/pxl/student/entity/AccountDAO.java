@@ -49,12 +49,17 @@ public class AccountDAO implements DAO<Account, AccountException> {
 
     @Override
     public Account create(Account account) throws AccountException {
-        try(PreparedStatement preparedStatement = manager.getConnection().prepareStatement("insert into account values(?,?,?)");) {
+        try(PreparedStatement preparedStatement = manager.getConnection().prepareStatement("insert into account (`IBAN`, `name`) values(?,?)");) {
 
-            preparedStatement.setInt(1,account.getId());
+
             preparedStatement.setString(2, account.getIBAN());
             preparedStatement.setString(3, account.getName());
             int result = preparedStatement.executeUpdate();
+            ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
+            if(generatedKeys.first()){
+                int accountId = generatedKeys.getInt(1);
+                account.setId(accountId);
+            }
             if(result == 1){
                 return account;
             }
